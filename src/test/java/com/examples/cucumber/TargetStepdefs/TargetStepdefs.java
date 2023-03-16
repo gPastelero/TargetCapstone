@@ -20,8 +20,10 @@ public class TargetStepdefs
     {
         // Setup Chrome options
         WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         // Create the Chrome driver
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         // Maximize the browser window
         driver.manage().window().maximize();
         // Add Implicit wait of 10 seconds
@@ -34,9 +36,9 @@ public class TargetStepdefs
     public void target_search(String search)
     {
         // Enter search string into the search bar
-        driver.findElement(By.id("twotabsearchtextbox")).sendKeys(search);
+        driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).sendKeys(search);
         // Click the search button
-        driver.findElement(By.id("nav-search-submit-button")).click();
+        driver.findElement(By.xpath("//button[@aria-label='go' and @type='submit']")).click();
     }
 
     @Then("I should get a result for {string} with producer Franklin Sports")
@@ -44,9 +46,9 @@ public class TargetStepdefs
     {
         // Store actual element
         String actual = driver.findElement(By.xpath(
-                "//*[contains(text(),'Design Patterns: Elements of Reusable Object-Oriented Software')]")).getText();
+                "//a[contains(text(),'Franklin Sports All Weather Size 5 Soccer Ball - Blue')]")).getText();
         // Store expected element
-        String expected = "Design Patterns: Elements of Reusable Object-Oriented Software";
+        String expected = search;
         // Check for equality
         Assert.assertEquals(expected, actual);
     }
