@@ -64,7 +64,7 @@ public class TargetStepdefs
         Assert.assertEquals(expected, actual);
     }
 
-    @When("I click on the image of the book")
+    @When("I click on the image of the soccer ball")
     public void click_image()
     {
         // Click on the image
@@ -72,7 +72,7 @@ public class TargetStepdefs
                 "//img[@alt = 'Design Patterns: Elements of Reusable Object-Oriented Software']")).click();
     }
 
-    @Then("I should be on a paperback tab where \"Buy New\" is selected")
+    @Then("I should select \"Shipping\" before adding to cart")
     public void buy_new()
     {
         // Click on paperback tab
@@ -82,7 +82,7 @@ public class TargetStepdefs
 
     }
 
-    @Given("I am on the page where \"Buy New\" is selected")
+    @Given("I am on the page where \"Shipping\" is selected")
     public void given_on_buy_new()
     {
         WebElement buyNew = new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -117,14 +117,14 @@ public class TargetStepdefs
         Assert.assertEquals(expected, actual);
     }
 
-    @When("I click on the anonymous shopping cart,")
+    @When("I click on \"View Cart & Checkout\"")
     public void i_click_on_the_anonymous_shopping_cart()
     {
         // Click on shopping cart
         driver.findElement(By.xpath("//div[@id='nav-cart-count-container']")).click();
     }
 
-    @Then("I should see the book listed with a subtotal")
+    @Then("I should see the soccer ball listed with a subtotal")
     public void i_should_see_the_book_listed_with_a_subtotal()
     {
         // Check element is displayed
@@ -145,14 +145,14 @@ public class TargetStepdefs
         Assert.assertEquals(expected,actual);
     }
 
-    @When("I click on \"Delete\"")
+    @When("I click on \"X\"")
     public void click_delete()
     {
         // Click on delete
         driver.findElement(By.xpath("//input[@Value='Delete']")).click();
     }
 
-    @Then("the page should tell me that my Amazon Cart is empty")
+    @Then("the page should tell me that my Target Cart is empty")
     public void delete_item_from_cart()
     {
         // Store actual element
