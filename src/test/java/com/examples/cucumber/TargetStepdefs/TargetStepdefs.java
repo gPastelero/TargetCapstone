@@ -57,9 +57,9 @@ public class TargetStepdefs
     public void search()
     {
         // Store actual element
-        String actual = driver.findElement(By.id("twotabsearchtextbox")).getAttribute("value").toLowerCase();
+        String actual = driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).getText();
         // Store expected element
-        String expected = "software design patterns";
+        String expected = "soccer ball";
         // Check for equality
         Assert.assertEquals(expected, actual);
     }
@@ -69,17 +69,14 @@ public class TargetStepdefs
     {
         // Click on the image
         driver.findElement(By.xpath(
-                "//img[@alt = 'Design Patterns: Elements of Reusable Object-Oriented Software']")).click();
+                "//img[@alt='Franklin Sports All Weather Size 5 Soccer Ball - Blue']")).click();
     }
 
     @Then("I should select \"Shipping\" before adding to cart")
     public void buy_new()
     {
-        // Click on paperback tab
-        driver.findElement(By.xpath("//a[@class='a-button-text']/span[text()='Paperback']")).click();
-        // Check selected on buy new
-        driver.findElement(By.xpath("//span[text()=' Buy new: ']")).isSelected();
-
+        // Click on shipping tab
+        driver.findElement(By.xpath("//button[@data-test='fulfillment-cell-shipping']")).click();
     }
 
     @Given("I am on the page where \"Shipping\" is selected")
