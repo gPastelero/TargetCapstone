@@ -137,9 +137,9 @@ public class TargetStepdefs
     public void delete_above_page()
     {
         // Store actual element
-        String actual = driver.findElement(By.xpath("//*[@id='sc-active-cart']/div/div/div/h1")).getText().toLowerCase();
+        String actual = driver.findElement(By.xpath("//h1[contains(text(),'Cart')]")).getText().toLowerCase();
         // Store expected element
-        String expected = "shopping cart";
+        String expected = "cart";
         // Check for equality
         Assert.assertEquals(expected,actual);
     }
@@ -148,7 +148,7 @@ public class TargetStepdefs
     public void click_delete()
     {
         // Click on delete
-        driver.findElement(By.xpath("//input[@Value='Delete']")).click();
+        driver.findElement(By.xpath("//button[@data-test='cartItem-deleteBtn']")).click();
     }
 
     @Then("the page should tell me that my Target Cart is empty")
@@ -157,10 +157,10 @@ public class TargetStepdefs
         // Store actual element
         WebElement cartEmpty = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(
-                        "//h1[contains(text(),'Your Amazon Cart is empty.')]")));
+                        "//h1[contains(text(),'Your cart is empty')]")));
         String actual = cartEmpty.getText();
         // Store expected element
-        String expected = "Your Amazon Cart is empty.";
+        String expected = "Your cart is empty";
         // Check for equality
         Assert.assertEquals(expected, actual);
         // Close the driver
