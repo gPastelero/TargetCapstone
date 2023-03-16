@@ -1,9 +1,8 @@
-package com.examples.cucumber.AmazonStepdefs;
+package com.examples.cucumber.TargetStepdefs;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
@@ -12,12 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class AmazonStepdefs
+public class TargetStepdefs
 {
     private static WebDriver driver;
 
-    @Given("I am on the Amazon home page amazon.com")
-    public void amazon_homepage()
+    @Given("I am on the Target home page target.com")
+    public void target_homepage()
     {
         // Setup Chrome options
         WebDriverManager.chromedriver().setup();
@@ -28,21 +27,11 @@ public class AmazonStepdefs
         // Add Implicit wait of 10 seconds
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         // Navigate to webpage
-        driver.get("https://www.amazon.com/");
-
-        try
-        {
-            // Allow time to enter captcha
-            Thread.sleep(7000);
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+        driver.get("https://www.target.com/");
     }
 
     @When("I search for {string}")
-    public void amazon_search(String search)
+    public void target_search(String search)
     {
         // Enter search string into the search bar
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys(search);
@@ -50,8 +39,8 @@ public class AmazonStepdefs
         driver.findElement(By.id("nav-search-submit-button")).click();
     }
 
-    @Then("I should get a result for {string} with authors Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides")
-    public void amazon_search_result(String search)
+    @Then("I should get a result for {string} with producer Franklin Sports")
+    public void target_search_result(String search)
     {
         // Store actual element
         String actual = driver.findElement(By.xpath(
