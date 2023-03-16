@@ -21,7 +21,7 @@ public class TargetStepdefs
         // Setup Chrome options
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         // Create the Chrome driver
         driver = new ChromeDriver(options);
         // Maximize the browser window
