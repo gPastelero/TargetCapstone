@@ -16,7 +16,7 @@ public class TargetStepdefs
     private static WebDriver driver;
 
     @Given("I am on the Target home page target.com")
-    public void target_homepage()
+    public void I_am_on_the_target_home_page()
     {
         // Setup Chrome options
         WebDriverManager.chromedriver().setup();
@@ -34,7 +34,7 @@ public class TargetStepdefs
     }
 
     @When("I search for {string}")
-    public void target_search(String search)
+    public void I_search_for(String search)
     {
         // Enter search string into the search bar
         driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).sendKeys(search);
@@ -43,7 +43,7 @@ public class TargetStepdefs
     }
 
     @Then("I should get a result for {string} with producer Franklin Sports")
-    public void target_search_result(String search)
+    public void I_should_get_a_result_for_string_with_producer_Franklin_Sports(String search)
     {
         // Store actual element
         String actual = driver.findElement(By.xpath(
@@ -55,7 +55,7 @@ public class TargetStepdefs
     }
 
     @Given("I performed the above search")
-    public void search()
+    public void I_performed_the_above_search()
     {
         // Store actual element
         String actual = driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).getAttribute("value");
@@ -66,7 +66,7 @@ public class TargetStepdefs
     }
 
     @When("I click on the image of the soccer ball")
-    public void click_image()
+    public void I_click_on_the_image_of_the_soccer_ball()
     {
         // Click on the image
         WebElement soccerBall = new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -76,20 +76,20 @@ public class TargetStepdefs
     }
 
     @Then("I should select \"Shipping\" before adding to cart")
-    public void buy_new()
+    public void I_should_select_Shipping_before_adding_to_cart()
     {
         // Click on shipping tab
         driver.findElement(By.xpath("//button[@data-test='fulfillment-cell-shipping']")).click();
     }
 
     @Given("I am on the page where \"Shipping\" is selected")
-    public void given_on_buy_new()
+    public void I_am_on_the_page_where_shipping_is_selected()
     {
         String title = driver.getTitle();
         Assert.assertEquals(title, "Franklin Sports All Weather Size 5 Soccer Ball - Blue : Target");
     }
     @When("I click \"Add to Cart\"")
-    public void add_to_cart()
+    public void I_click_add_to_cart()
     {
         //
         WebElement addToCart = new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -99,7 +99,7 @@ public class TargetStepdefs
         addToCart.click();
     }
     @Then("I should see a message saying \"Added to cart\"")
-    public void check_cart()
+    public void I_should_see_a_message_saying_added_to_cart()
     {
         // Store actual element
         WebElement addedToCart = new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -142,7 +142,7 @@ public class TargetStepdefs
     }
 
     @Given("I am on the above page")
-    public void delete_above_page()
+    public void i_am_on_the_above_page()
     {
         // Store actual element
         String actual = driver.findElement(By.xpath("//h1[contains(text(),'Cart')]")).getText().toLowerCase();
@@ -153,7 +153,7 @@ public class TargetStepdefs
     }
 
     @When("I click on \"X\"")
-    public void click_delete()
+    public void I_click_on_x()
     {
         // Get the x element
         WebElement x = new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -164,7 +164,7 @@ public class TargetStepdefs
     }
 
     @Then("the page should tell me that my Target Cart is empty")
-    public void delete_item_from_cart()
+    public void the_page_should_tell_me_that_my_target_cart_is_empty()
     {
         // Store actual element
         WebElement cartEmpty = new WebDriverWait(driver, Duration.ofSeconds(10))
