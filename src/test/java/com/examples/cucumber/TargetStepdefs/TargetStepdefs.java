@@ -28,7 +28,7 @@ public class TargetStepdefs
         // Maximize the browser window
         driver.manage().window().maximize();
         // Add Implicit wait of 10 seconds
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         // Navigate to webpage
         driver.get("https://www.target.com/");
     }
@@ -102,7 +102,10 @@ public class TargetStepdefs
     public void check_cart()
     {
         // Store actual element
-        String actual = driver.findElement(By.xpath("//span[text()='Added to cart']")).getText();
+        WebElement addedToCart = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                        "//span[text()='Added to cart']")));
+        String actual = addedToCart.getText();
         // Store expected element
         String expected = "Added to cart";
         // Check for equality
@@ -165,8 +168,8 @@ public class TargetStepdefs
     {
         // Store actual element
         WebElement cartEmpty = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath(
-                        "//h1[contains(text(),'Your cart is empty')]")));
+                .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(
+                        "//h1[contains(text(),'Your cart is empty')]"))));
         String actual = cartEmpty.getText();
         // Store expected element
         String expected = "Your cart is empty";
