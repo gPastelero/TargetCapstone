@@ -96,7 +96,7 @@ public class TargetStepdefs
         // Click the add to cart button
         driver.findElement(By.id("add-to-cart-button")).click();
     }
-    @Then("the anonymous shopping cart should have 1 item in it.")
+    @Then("I should see a message saying \"Added to cart\"")
     public void check_cart()
     {
         // Store actual element

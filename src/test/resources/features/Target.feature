@@ -15,7 +15,7 @@ Feature: Target
   Scenario: Add to cart
     Given I am on the page where "Shipping" is selected
     When I click "Add to Cart"
-    Then the anonymous shopping cart should have 1 item in it.
+    Then I should see a message saying "Added to cart"
 
   Scenario: View Cart & Checkout
     Given I have performed the above actions
