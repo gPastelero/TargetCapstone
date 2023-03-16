@@ -57,7 +57,7 @@ public class TargetStepdefs
     public void search()
     {
         // Store actual element
-        String actual = driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).getText();
+        String actual = driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).getAttribute("value");
         // Store expected element
         String expected = "soccer ball";
         // Check for equality
@@ -68,8 +68,10 @@ public class TargetStepdefs
     public void click_image()
     {
         // Click on the image
-        driver.findElement(By.xpath(
-                "//img[@alt='Franklin Sports All Weather Size 5 Soccer Ball - Blue']")).click();
+        WebElement soccerBall = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//img[@alt='Franklin Sports All Weather Size 5 Soccer Ball - Blue']")));
+        soccerBall.click();
     }
 
     @Then("I should select \"Shipping\" before adding to cart")
@@ -82,24 +84,22 @@ public class TargetStepdefs
     @Given("I am on the page where \"Shipping\" is selected")
     public void given_on_buy_new()
     {
-        WebElement buyNew = new WebDriverWait(driver, Duration.ofSeconds(10))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath(
-            "//i[@class='a-icon a-accordion-radio a-icon-radio-active']/following-sibling::h5/div/div/span[text()=' Buy new: ']")));
-        Assert.assertTrue(buyNew.isDisplayed());
+        String title = driver.getTitle();
+        Assert.assertEquals(title, "Franklin Sports All Weather Size 5 Soccer Ball - Blue : Target");
     }
     @When("I click \"Add to Cart\"")
     public void add_to_cart()
     {
         // Click the add to cart button
-        driver.findElement(By.id("add-to-cart-button")).click();
+        driver.findElement(By.xpath("//button[text()='Add to cart']")).click();
     }
     @Then("I should see a message saying \"Added to cart\"")
     public void check_cart()
     {
         // Store actual element
-        String actual = driver.findElement(By.xpath("//div[contains(text(),' (1 item)')]")).getText();
+        String actual = driver.findElement(By.xpath("//span[text()='Added to cart']")).getText();
         // Store expected element
-        String expected = "Proceed to checkout (1 item)";
+        String expected = "Added to cart";
         // Check for equality
         Assert.assertEquals(expected, actual);
     }
@@ -130,7 +130,7 @@ public class TargetStepdefs
                 "//div[text()='Franklin Sports All Weather Size 5 Soccer Ball - Blue']")).isDisplayed());
         // Check element is displayed
         Assert.assertTrue(driver.findElement(By.xpath(
-                "////span[text()='Subtotal']")).isDisplayed());
+                "//span[text()='Subtotal']")).isDisplayed());
     }
 
     @Given("I am on the above page")
