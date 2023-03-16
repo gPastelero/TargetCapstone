@@ -22,6 +22,7 @@ public class TargetStepdefs
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.addArguments("window-size=1920, 1080");
         // Create the Chrome driver
         driver = new ChromeDriver(options);
         // Maximize the browser window
