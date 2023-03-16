@@ -21,7 +21,7 @@ public class TargetStepdefs
         // Setup Chrome options
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         // Create the Chrome driver
         driver = new ChromeDriver(options);
         // Maximize the browser window
@@ -110,9 +110,10 @@ public class TargetStepdefs
     public void i_have_performed_the_above_actions()
     {
         // Store actual element
-        String actual = driver.getTitle();
+        String actual = driver.findElement(By.xpath(
+                "//h4[text()='Franklin Sports All Weather Size 5 Soccer Ball - Blue']")).getText();
         // Store expected element
-        String expected = "Amazon.com Shopping Cart";
+        String expected = "Franklin Sports All Weather Size 5 Soccer Ball - Blue";
         // Check for equality
         Assert.assertEquals(expected, actual);
     }
@@ -121,17 +122,18 @@ public class TargetStepdefs
     public void i_click_on_the_anonymous_shopping_cart()
     {
         // Click on shopping cart
-        driver.findElement(By.xpath("//div[@id='nav-cart-count-container']")).click();
+        driver.findElement(By.xpath("//a[@href='/cart']")).click();
     }
 
     @Then("I should see the soccer ball listed with a subtotal")
     public void i_should_see_the_book_listed_with_a_subtotal()
     {
         // Check element is displayed
-        Assert.assertTrue(driver.findElement(By.xpath("//span[contains(@id,'sc-subtotal-label-activecart')]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(
+                "//div[text()='Franklin Sports All Weather Size 5 Soccer Ball - Blue']")).isDisplayed());
         // Check element is displayed
         Assert.assertTrue(driver.findElement(By.xpath(
-                "//span[contains(text(),'Design Patterns: Elements of Reusable') and @class='a-truncate-cut']")).isDisplayed());
+                "////span[text()='Subtotal']")).isDisplayed());
     }
 
     @Given("I am on the above page")
