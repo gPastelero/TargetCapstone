@@ -90,8 +90,12 @@ public class TargetStepdefs
     @When("I click \"Add to Cart\"")
     public void add_to_cart()
     {
+        //
+        WebElement addToCart = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//button[text()='Add to cart']")));
         // Click the add to cart button
-        driver.findElement(By.xpath("//button[text()='Add to cart']")).click();
+        addToCart.click();
     }
     @Then("I should see a message saying \"Added to cart\"")
     public void check_cart()
@@ -147,8 +151,12 @@ public class TargetStepdefs
     @When("I click on \"X\"")
     public void click_delete()
     {
-        // Click on delete
-        driver.findElement(By.xpath("//button[@data-test='cartItem-deleteBtn']")).click();
+        // Get the x element
+        WebElement x = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//button[@data-test='cartItem-deleteBtn']")));
+        // Click on X
+        x.click();
     }
 
     @Then("the page should tell me that my Target Cart is empty")
