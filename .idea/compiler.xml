@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Target" />
         <module name="amazonproject" />
         <module name="AmazonCapstone031423" />
-        <module name="Amazon" />
         <module name="MyBeerCans" />
         <module name="Team1_Capstone" />
       </profile>
