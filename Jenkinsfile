@@ -14,7 +14,6 @@ pipeline {
       steps {
         echo 'Testing....'
         sh 'mvn test -B'
-        sh 'run_tests --format junit --output test-results.xml'
       }
     }
   }
