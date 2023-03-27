@@ -27,3 +27,4 @@ Feature: Target
     Given I am on the above page
     When I click on "X"
     Then the page should tell me that my Target Cart is empty
+    Then I close the browser

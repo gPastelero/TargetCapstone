@@ -1,7 +1,8 @@
 package com.examples.cucumber.TargetStepdefs;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -9,7 +10,9 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileInputStream;
 import java.time.Duration;
+import java.util.Properties;
 
 public class TargetStepdefs
 {
@@ -23,6 +26,7 @@ public class TargetStepdefs
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("window-size=1920, 1080");
+        options.addArguments("--disable-blink-features=AutomationControlled");
         // Create the Chrome driver
         driver = new ChromeDriver(options);
         // Maximize the browser window
@@ -42,6 +46,15 @@ public class TargetStepdefs
         driver.findElement(By.xpath("//button[@aria-label='go' and @type='submit']")).click();
     }
 
+    @When("I search for {string} and refresh")
+    public void I_search_for_and_refresh(String search)
+    {
+        // Enter search string into the search bar
+        driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).sendKeys(search);
+        // Click the search button
+        driver.findElement(By.xpath("//button[@aria-label='go' and @type='submit']")).click();
+    }
+
     @Then("I should get a result for {string} with producer Franklin Sports")
     public void I_should_get_a_result_for_string_with_producer_Franklin_Sports(String search)
     {
@@ -52,6 +65,19 @@ public class TargetStepdefs
         String expected = search;
         // Check for equality
         Assert.assertEquals(expected, actual);
+    }
+
+    
+    @Then("the search should not return any items")
+    public void Then_the_search_should_not_return_any_items()
+    {
+        try {
+            Thread.sleep(750);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.navigate().refresh();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[text()=\"We couldn’t find a match \"]")).isDisplayed());
     }
 
     @Given("I performed the above search")
@@ -175,7 +201,70 @@ public class TargetStepdefs
         String expected = "Your cart is empty";
         // Check for equality
         Assert.assertEquals(expected, actual);
-        // Close the driver
+        // Quit the driver
         driver.quit();
+    }
+
+    @Then("I close the browser")
+    public void quit()
+    {
+        driver.quit();
+    }
+
+    //Logging in
+    @When("I click on the Sign in button")
+    public void I_click_on_the_login_button()
+    {
+        driver.findElement(By.xpath("//span[text()='Sign in']")).click();
+    }
+
+    @Then("I should see a side panel with account options")
+    public void I_should_see_a_side_panel_with_account_options()
+    {
+        String expected = "Account";
+        String actual = driver.findElement(By.xpath("//h2[text()='Account']")).getText();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @When("I click on the \"Create Account\" button")
+    public void I_click_on_the_sign_in_button()
+    {
+        driver.findElement(By.xpath("//span[text()='Create Account']")).click();
+    }
+
+    @Then("I should be redirected to the login page")
+    public void I_should_be_redirected_to_the_login_page()
+    {
+        String expected = "Login: Target";
+        String actual = driver.getTitle();
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @And("I can enter all of my account information")
+    public void I_can_enter_all_of_my_account_information()
+    {
+        driver.findElement(By.id("username")).sendKeys("smurfmail115+16@gmail.com");
+        driver.findElement(By.id("firstname")).sendKeys("Bob");
+        driver.findElement(By.id("lastname")).sendKeys("Bobbington");
+
+    }
+
+    //I enter my <Password>, it should check if <Valid>
+    @When("I enter my {string}, it should check if {string}")
+    public void I_enter_my_Password_it_should_check_for_validation(String pass, String valid)
+    {
+        driver.findElement(By.id("password")).sendKeys(pass);
+        if(valid.equals("true"))
+        {
+            Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Your password is ready to go!']")).isDisplayed());
+        }
+        else
+        {
+            Assert.assertTrue(driver.findElements(By.xpath("//span[text()='Your password is ready to go!']")).isEmpty());
+        }
+        driver.findElement(By.id("password")).sendKeys(Keys.CONTROL + "a");
+        driver.findElement(By.id("password")).sendKeys(Keys.DELETE);
     }
 }
