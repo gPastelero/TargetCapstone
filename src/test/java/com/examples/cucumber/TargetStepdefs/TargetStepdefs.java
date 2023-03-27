@@ -201,8 +201,6 @@ public class TargetStepdefs
         String expected = "Your cart is empty";
         // Check for equality
         Assert.assertEquals(expected, actual);
-        // Quit the driver
-        driver.quit();
     }
 
     @Then("I close the browser")
@@ -211,7 +209,7 @@ public class TargetStepdefs
         driver.quit();
     }
 
-    //Logging in
+    //Create Account
     @When("I click on the Sign in button")
     public void I_click_on_the_login_button()
     {
@@ -248,22 +246,24 @@ public class TargetStepdefs
         driver.findElement(By.id("username")).sendKeys("smurfmail115+16@gmail.com");
         driver.findElement(By.id("firstname")).sendKeys("Bob");
         driver.findElement(By.id("lastname")).sendKeys("Bobbington");
-
     }
 
-    //I enter my <Password>, it should check if <Valid>
     @When("I enter my {string}, it should check if {string}")
     public void I_enter_my_Password_it_should_check_for_validation(String pass, String valid)
     {
         driver.findElement(By.id("password")).sendKeys(pass);
         if(valid.equals("true"))
         {
-            Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Your password is ready to go!']")).isDisplayed());
+            Assert.assertTrue(driver.findElement(By.xpath(
+                    "//span[text()='Your password is ready to go!']")).isDisplayed());
         }
         else
         {
-            Assert.assertTrue(driver.findElements(By.xpath("//span[text()='Your password is ready to go!']")).isEmpty());
+            Assert.assertTrue(driver.findElements(By.xpath(
+                    "//span[text()='Your password is ready to go!']")).isEmpty());
         }
+
+        // Clear the password field
         driver.findElement(By.id("password")).sendKeys(Keys.CONTROL + "a");
         driver.findElement(By.id("password")).sendKeys(Keys.DELETE);
     }

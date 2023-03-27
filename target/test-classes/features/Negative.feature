@@ -13,12 +13,12 @@ Feature: Negative
   Scenario Outline: Password validation
     When I enter my <Password>, it should check if <Valid>
     Examples:
-      | Password      | Valid|
-      |"qeaTeam1"       |"true"  |
-      |"password1"|"true"        |
-      |"ABCDEFGh" |"true"        |
-      |"-1-1-1-1-1-1"|  "true"     |
-    |"abcdefghijklm"|"false"   |
+      | Password      | Valid  |
+      |"qeaTeam1"     |"true"  |
+      |"password1"    |"true"  |
+      |"ABCDEFGh"     |"true"  |
+      |"-1-1-1-1-1-1" |"true"  |
+      |"abcdefghijklm"|"false" |
   Scenario: Cleanup
     Then I close the browser
 
