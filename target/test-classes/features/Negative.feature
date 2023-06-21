@@ -1,7 +1,7 @@
 Feature: Negative
 
   @negative
-  Scenario: Login checking
+  Scenario: Going to the login page
     Given I am on the Target home page target.com
     When I click on the Sign in button
     Then I should see a side panel with account options

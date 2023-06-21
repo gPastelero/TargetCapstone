@@ -41,7 +41,7 @@ public class TargetStepdefs
     public void I_search_for(String search)
     {
         // Enter search string into the search bar
-        driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).sendKeys(search);
+        driver.findElement(By.xpath("//input[@id='searchMobile']")).sendKeys(search);
         // Click the search button
         driver.findElement(By.xpath("//button[@aria-label='go' and @type='submit']")).click();
     }
@@ -50,7 +50,7 @@ public class TargetStepdefs
     public void I_search_for_and_refresh(String search)
     {
         // Enter search string into the search bar
-        driver.findElement(By.xpath("//input[@id='search' and @placeholder='Search']")).sendKeys(search);
+        driver.findElement(By.xpath("//input[@id='searchMobile']")).sendKeys(search);
         // Click the search button
         driver.findElement(By.xpath("//button[@aria-label='go' and @type='submit']")).click();
     }
