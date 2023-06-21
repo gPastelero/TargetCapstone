@@ -7,8 +7,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"classpath:features/Target.feature",
-                "classpath:features/Negative.feature"},
+        features = {
+                "classpath:features/Target.feature",
+                "classpath:features/Negative.feature"
+                },
         plugin = { "pretty",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         dryRun = false,
